@@ -15,13 +15,18 @@ sufficient for most people to create the data they need.
 - **Find the Query-FF project at CodeOcean.**  Go to "Explore" and search for 
 FracFocus or query-FF, and open the project (CodeOcean calls them capsules.)
 
-- **Run the default published code.**  To do this, just click on the "Re-Run" button.
+- **Run the default published code.**  To do this, just click on the `Re-Run` button.
 You may have to answer a question or two to get it started, but then it will re-run 
-project as it was published. Once it is finished, examine the results files (right-hand
-panel of the webpage).
+the project as it was published. Once it is finished, examine the results files (right-hand
+panel of the webpage). You now have a new private copy of the project that you
+can edit however you see fit.  You can come back to it any time through your 
+CodeOcean "dashboard."
 
-- **Edit the default script.** Click on "Edit Capsule" in the upper right corner.
-This causes CodeOcean to create a new private copy of the project for you.  
+- **Edit the default script.** Get to your private copy of query-FF, and edit
+the file "main_script.py."  Run it.  You are on your way to creating your own scripts! 
+If you feel you have made a mess of the code and can't figure out how to make 
+it work, you 
+can always create a new private copy from the published version.
 
 
 ## General structure of custom scripts 
@@ -44,24 +49,24 @@ df = filter_by_state(df,['texas'])        # line 2
 df = filter_by_county(df,['carnes'])      # line 3
 save_to_csv(df)                           # line 4
 ```
-Line 1 creates a data frame called **df** that has the entire default open-FF data set.
+**Line 1** creates a data frame called `df` that has the entire default open-FF data set.
 Something like this will be in every script. 
 
-Just a note about script lines of this structure:  xxx = yyy() : What's on the 
+Just a note about script lines of this structure:  `xxx = yyy()` : What's on the 
 right side of the equal sign is the function performed with the parentheses 
 showing what is passed into the function.  What's on the left side
 is the output from that function.  So in the case of line 1, the function 
-**get_df_base**
+`get_df_base`
 is called, with nothing passed in.  The result of that function is
-stored with the label **df**.
+stored with the label `df`.
 
-Line 2 removes all records from **df** except where the bgStateName is 'texas'.  
-We use the contents of **df** from line 1 as the input to line 2's function and
-line 2's output is stored again in **df**.
+**Line 2** removes all records from `df` except where the `bgStateName` is 'texas'.  
+We use the contents of `df` from line 1 as the input to line 2's function and
+line 2's output is stored again in `df`.
 
-Line 3 removes all records from **df** except where the bgCountyName is 'carnes'
+**Line 3** removes all records from `df` except where the `bgCountyName` is 'carnes'
 
-Line 4 save that resulting data frame into a file in the csv format.  This script
+**Line 4** save that resulting data frame into a file in the csv format.  This script
 line does not return a dataframe.  Instead, it writes a file to disk for your use
 later.
 
@@ -73,7 +78,7 @@ is the default set. Unless you specify the full set, you will be working with th
 filtered set.  We expect that most people will want this filtered set.
 
 If you want to work with the full set, perhaps to investigate the nature of some
-of the errors, you can use the "record_flags" field to target specific types of 
+of the errors, you can use the `record_flags` field to target specific types of 
 records.  (see Example...)  
 
 ## Filtering to the set you want

@@ -1,9 +1,8 @@
 # User's Guide to query-FF
 
-
 The **query-FF** project is a set of functions designed to facilitate the extraction
-and analysis of data from the **open-FF** project: data organized and cleaned from
-FracFocus.  
+and analysis of data from the **open-FF** project to give users access to FracFocus data
+that has bee organized and cleaned.  See the [description of the open-FF project](https://frackingchemicaldisclosure.wordpress.com/).  
 
 ## Quick Start
 - **Signup at CodeOcean for an account.**  Currently, all users are given at least one hour
@@ -30,7 +29,6 @@ can always create a new private copy from the published version.
 
 
 ## General structure of custom scripts 
-
 
 To extract the data you want, you write a simple script and then execute it
 directly in CodeOcean.  But don't worry! These scripts do not require you to
@@ -64,16 +62,19 @@ stored with the label `df`.
 We use the contents of `df` from line 1 as the input to line 2's function and
 line 2's output is stored again in `df`.
 
-**Line 3** removes all records from `df` except where the `bgCountyName` is 'carnes'
+**Line 3** removes all records from `df` except where the `bgCountyName` is 'carnes'.
+Again, we store the output in `df`.
 
-**Line 4** save that resulting data frame into a file in the csv format.  This script
-line does not return a dataframe.  Instead, it writes a file to disk for your use
-later.
+**Line 4** saves that resulting data frame (stored in `df`) into a file in the csv format.  This script
+line does not return a dataframe.  Instead, it writes a file to disk for your later use. 
+You can download it into a spreadsheet program and make cool charts, 
+send it to your friends, or post it on your Instagram. 
 
 ## Starting with the open-FF data set that works best for you
 Currently, there are two forms of the open-FF data that you can start with:
 - the 'full' data set, including records that have been detected with errors
-- the 'filtered' data set, that has the error-ladened records removed.  This set 
+- the 'filtered' data set, that has the error-ladened and ambiguous 
+records removed.  This set 
 is the default set. Unless you specify the full set, you will be working with the 
 filtered set.  We expect that most people will want this filtered set.
 
@@ -96,4 +97,30 @@ records.  (see Example...)
 ## Saving the data
 
 
+## Using the power of python/pandas yourself
+Although we have tried to construct Query-FF so that users don't need to know
+how to program to get usable results, **if you know some programming**, you can 
+use the full power of python/pandas and other
+modules directly in your scripts.  Even though the samples use mostly just 
+the functions that we
+have defined in this project, you are not at all limited to them.  
 
+Here is a silly example.  Suppose you want to have a data set for only the
+operators whose name begins with the letter 'r'.  Add a little python code and
+it is simple:
+
+```python
+df = get_df_base()                        
+
+companylst = list(df.bgOperatorName.unique()) # get list of all operators
+r_lst = []                                    # start empty list
+for company in companylst:                    # loop through company list
+    if company[0]=='r':                       # if the first letter of the name is 'r'
+        r_lst.append(company)                 #    append it to r_lst
+
+df = filter_by_operator(df,keep_operators=r_lst)  # use r_lst to filter
+
+save_to_csv(df)
+```
+There are more sophisticated ways of doing the same thing, but you get the
+point.  You are not limited to the small set of functions *we* have defined.

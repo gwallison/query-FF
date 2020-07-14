@@ -24,6 +24,7 @@ version = 'default'  # 'default' or 'full'
 
 df = get_base_df(version=version)
 df = filter_by_state(df,['texas','ohio'])  # can filter by more a list
+print(df.columns)
 df = filter_by_bgCAS(df,['50-00-0'])  #
 df = keep_only_columns(df,cols=['bgCountyName','bgCAS','bgMass'])
 save_as_csv(df)

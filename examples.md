@@ -3,14 +3,14 @@
   * [Defaults](#defaults)
   * [Simple filtering](#simple-filtering)
     + [Simple subsets of the whole data set](#simple-subsets-of-the-whole-data-set)
-    + [By state: All records for the state of Ohio](#by-state--all-records-for-the-state-of-ohio)
-    + [By operator: All records where the Operator is Chesapeake.](#by-operator--all-records-where-the-operator-is-chesapeake)
-    + [By chemical: All records of 2-butoxy-ethanol or CAS registration number 111-76-2](#by-chemical--all-records-of-2-butoxy-ethanol-or-cas-registration-number-111-76-2)
-    + [By date: All records in years 2016-2018](#by-date--all-records-in-years-2016-2018)
+    + [By state](#by-state)
+    + [By operator](#by-operator)
+    + [By chemical](#by-chemical)
+    + [By date](#by-date)
     + [Keep only records labeled as "proprietary"](#keep-only-records-labeled-as--proprietary-)
   * [Simple exploration](#simple-exploration)
 
-
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
 
 # Intro
@@ -55,7 +55,8 @@ Under construction
 ### Simple subsets of the whole data set
 To get simple subsets, such as all the records for a specific state, company,
 or chemical, very little code is needed.
-### By state: All records for the state of Ohio
+### By state 
+Here we keep all records for the state of Ohio
 ```python
 df = get_base_df()
 df = filter_by_state(df,['ohio'])  
@@ -64,7 +65,8 @@ save_as_csv(df,fn='AllOhio')
 With this code, the output will be saved in a csv file named `AllOhio.csv`.  If
 you leave out the `fn='AllOhio'` part, the default is `output.csv`.
 
-### By operator: All records where the Operator is Chesapeake.
+### By operator
+Keep all records where the Operator is Chesapeake.
 ```python
 df = get_base_df()
 df = filter_by_operator(df,operators=['chesapeake'])  
@@ -74,7 +76,8 @@ This function uses the field `bgOperatorName` which is a curated version of
 `OperatorName`.  There are many misspellings in the raw OperatorName that are
 grouped together under a single lower-case `bgOperatorName` value.
 
-### By chemical: All records of 2-butoxy-ethanol or CAS registration number 111-76-2 
+### By chemical
+Keep all records of 2-butoxy-ethanol or CAS registration number 111-76-2 
 ```python
 df = get_base_df()
 df = filter_by_bgCAS(df,casnums=['111-76-2'])  
@@ -83,7 +86,8 @@ save_as_csv(df)
 Note that single or double quotes must be around the CAS# to indicate that it
 is a string, not a number.
 
-### By date: All records in years 2016-2018
+### By date
+Keep all records in years 2016-2018
 ```python
 df = get_base_df()
 df = filter_by_year_range(df,minyr=2016,maxyr=2018)  

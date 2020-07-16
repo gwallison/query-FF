@@ -1,11 +1,14 @@
-[TOC]
+[Intro](#Intro)
+[How to use these examples in your own scripts](#HowToUse)
+[Defaults](#Defaults)
 
-# Example scripts
+<a name="Intro"/>
+# Intro
 This file contains several simple query-FF scripts that can be used to build
 a customized data set and to do exploratory analysis. 
 
-
-## Using the examples for your own scripts
+<a name="HowToUse"/>
+## How to use these examples in your own scripts
 To run these example scripts:
 1. Copy the code from an example and paste it
 into a template file.  The template file has a specific location where the 
@@ -34,6 +37,7 @@ large, you may wish to occasionally delete runs that are not being used. (In the
 list of runs in the right panel, next to the execution time of each completed run
 is a 'down-arrow'.  Click on that to see the options, including the delete option.)
 
+<a name="Defaults"/>
 ## Defaults
 Under construction
 

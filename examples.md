@@ -1,13 +1,22 @@
-[Intro](#Intro)
-[How to use these examples in your own scripts](#HowToUse)
-[Defaults](#Defaults)
+- [Intro](#intro)
+  * [How to use these examples in your own scripts](#how-to-use-these-examples-in-your-own-scripts)
+  * [Defaults](#defaults)
+  * [Simple filtering](#simple-filtering)
+    + [Simple subsets of the whole data set](#simple-subsets-of-the-whole-data-set)
+    + [By state: All records for the state of Ohio](#by-state--all-records-for-the-state-of-ohio)
+    + [By operator: All records where the Operator is Chesapeake.](#by-operator--all-records-where-the-operator-is-chesapeake)
+    + [By chemical: All records of 2-butoxy-ethanol or CAS registration number 111-76-2](#by-chemical--all-records-of-2-butoxy-ethanol-or-cas-registration-number-111-76-2)
+    + [By date: All records in years 2016-2018](#by-date--all-records-in-years-2016-2018)
+    + [Keep only records labeled as "proprietary"](#keep-only-records-labeled-as--proprietary-)
+  * [Simple exploration](#simple-exploration)
 
-<a name="Intro"/>
+
+
+
 # Intro
 This file contains several simple query-FF scripts that can be used to build
 a customized data set and to do exploratory analysis. 
 
-<a name="HowToUse"/>
 ## How to use these examples in your own scripts
 To run these example scripts:
 1. Copy the code from an example and paste it
@@ -37,7 +46,6 @@ large, you may wish to occasionally delete runs that are not being used. (In the
 list of runs in the right panel, next to the execution time of each completed run
 is a 'down-arrow'.  Click on that to see the options, including the delete option.)
 
-<a name="Defaults"/>
 ## Defaults
 Under construction
 

@@ -1,6 +1,9 @@
+[TOC]
+
 # Example scripts
 This file contains several simple query-FF scripts that can be used to build
 a customized data set and to do exploratory analysis. 
+
 
 ## Using the examples for your own scripts
 To run these example scripts:
@@ -32,6 +35,8 @@ list of runs in the right panel, next to the execution time of each completed ru
 is a 'down-arrow'.  Click on that to see the options, including the delete option.)
 
 ## Defaults
+Under construction
+
 
 
 ## Simple filtering
@@ -82,4 +87,4 @@ save_as_csv(df)
 
 
 ## Simple exploration
-
+Under construction

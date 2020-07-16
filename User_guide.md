@@ -2,7 +2,7 @@
 
 The **query-FF** project is a set of functions designed to facilitate the extraction
 and analysis of data from the **open-FF** project to give users access to FracFocus data
-that has bee organized and cleaned.  See the [description of the open-FF project](https://frackingchemicaldisclosure.wordpress.com/).  
+that has been organized and cleaned.  See the [description of the open-FF project](https://frackingchemicaldisclosure.wordpress.com/).  
 
 ## Quick Start
 - **Signup at CodeOcean for an account.**  Currently, all users are given at least one hour
@@ -22,7 +22,7 @@ can edit however you see fit.  You can come back to it any time through your
 CodeOcean "dashboard."
 
 - **Edit the default script.** Get to your private copy of query-FF, and edit
-the file "main_script.py."  Run it.  You are on your way to creating your own scripts! 
+the file "working_script.py."  Run it.  You are on your way to creating your own scripts! 
 If you feel you have made a mess of the code and can't figure out how to make 
 it work, you 
 can always create a new private copy from the published version.

@@ -2,8 +2,12 @@
 """
 @author: GAllison
 
-This file is used as the main script within query-FF to run analysis and 
-create output files.  Users edit this file and then run the project.
+This file can be used to create new scripts. To do that, 
+- add your code in the User Area.  Do NOT change anything in the Preamble.  
+Save this file as "working_script.py" 
+
+Run it!
+.
     
 """
 ##########################################################################
@@ -16,15 +20,16 @@ from modules.filters import *
 from modules.save_out import *
 from modules.show_user import *
 
-##########################################################################
-#   User section.  Make changes here to customize the process            #
-##########################################################################
 
-version = 'default'  # 'default' or 'full'
+##########################################################################
+#   User Area.                                                           #
+#                                                                        #
+#   Here is a simple example:                                            #
+#                                                                        #
+#   df = get_base_df()                                                   #
+#   df = filter_by_state(df,['ohio'])                                    #
+#   save_as_csv(df)                                                      #
+#                                                                        #
+##########################################################################
+############  Your code goes below this line #############################
 
-df = get_base_df(version=version)
-df = filter_by_state(df,['texas','ohio'])  # can filter by more a list
-print(df.columns)
-df = filter_by_bgCAS(df,['50-00-0'])  #
-df = keep_only_columns(df,cols=['bgCountyName','bgCAS','bgMass'])
-save_as_csv(df)

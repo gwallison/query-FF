@@ -1,3 +1,17 @@
+- [User's Guide to query-FF](#user-s-guide-to-query-ff)
+  * [Quick Start](#quick-start)
+  * [General structure of custom scripts](#general-structure-of-custom-scripts)
+  * [Starting with the open-FF data set that works best for you](#starting-with-the-open-ff-data-set-that-works-best-for-you)
+  * [Filtering to the set you want](#filtering-to-the-set-you-want)
+  * [Displaying the data throughout the process](#displaying-the-data-throughout-the-process)
+  * [Basic analysis](#basic-analysis)
+  * [Summarizing the data](#summarizing-the-data)
+  * [Saving the data](#saving-the-data)
+  * [Using the power of python/pandas yourself](#using-the-power-of-python-pandas-yourself)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
+
 # User's Guide to query-FF
 
 The **query-FF** project is a set of functions designed to facilitate the extraction

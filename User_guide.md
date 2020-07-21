@@ -53,12 +53,12 @@ what you want your output to look like and to think a little about what steps
 will get you there.
 
 Here's an example.  Say you want all the records in the data set for fracking events
-that happened in Carnes County, Texas.  The following script will do that for you:
+that happened in Karnes County, Texas.  The following script will do that for you:
 
 ``` python
 df = get_df_base()                        # line 1
 df = filter_by_state(df,['texas'])        # line 2
-df = filter_by_county(df,['carnes'])      # line 3
+df = filter_by_county(df,['karnes'])      # line 3
 save_to_csv(df)                           # line 4
 ```
 **Line 1** creates a data frame called `df` that has the entire default open-FF data set.

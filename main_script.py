@@ -20,11 +20,7 @@ from modules.show_user import *
 #   User section.  Make changes here to customize the process            #
 ##########################################################################
 
-df = get_base_df()
-df = filter_by_state(df,['texas'])  # can filter by more a list
-#print(df.columns)
-#df = filter_by_bgCAS(df,['50-00-0'])  #
-#df = keep_only_columns(df,cols=['StateName','bgCountyName','bgCAS','bgMass'])
-#show_column_summary(df,columnname='TradeName')
-show_columns(df)
-#save_as_csv(df)
+df = get_base_df()                        # line 1
+df = filter_by_state(df,['texas'])        # line 2
+df = filter_by_county(df,['karnes'])      # line 3
+save_as_csv(df)        

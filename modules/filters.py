@@ -27,14 +27,6 @@ def keep_only_columns(df,cols=defaults.output_cols):
     simple_df_summary(df)
     return df
 
-# =============================================================================
-# def drop_columns(df,cols=[]):
-#     exec_banner(inspect.currentframe().f_code.co_name)
-#     df  = df.drop(cols,axis=1)
-#     simple_df_summary(df)
-#     return df
-# 
-# =============================================================================
 def filter_by_state(df,keep_states=defaults.states_to_keep):
     """ Return dataframe with only rows where bgStateName is in "keep_states" list.
     

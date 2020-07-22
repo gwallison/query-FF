@@ -33,11 +33,6 @@ large, you may wish to occasionally delete runs that are not being used. (In the
 list of runs in the right panel, next to the execution time of each completed run
 is a 'down-arrow'.  Click on that to see the options, including the delete option.)
 
-# Defaults
-Under construction
-
-
-
 # Simple filtering
 To get simple subsets, such as all the records for a specific state, company,
 or chemical, very little code is needed.
@@ -119,11 +114,23 @@ show_columns(df)
 ## Show summary of a specific field
 ```python
 df = get_base_df()
-show_column_summary(df,colname='TradeName') 
+show_column_summary(df,columnname='TradeName') 
 ```
 When the column contains strings (instead of numbers), the results of this function
 will be saved into the results as a csv file, unless you include the parameter `save=False`.
 **Under construction**
 
 # Debugging your scripts
+** Under construction **
+Because this project is currently under development, please feel free to contact
+the authors with any questions or problems.  Your feedback will help us improve
+`query-FF`
+
+# Defaults
+This file, `code/defaults.py` 
+is used to set up the defaults used throughout
+any given run.  Typically, you will make your code changes just in ```working_script.py```
+but you may want to look at the defaults to understand the code's operation.
+
+# Samples of using python/pandas coding
 ** Under construction **

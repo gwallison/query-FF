@@ -7,6 +7,7 @@ Created on Sun Jul 12 06:59:19 2020
 various funtions to display progress and results to user
 """
 import defaults
+import inspect
 
 def banner(text):
     """Print banner during execution of script"""
@@ -40,7 +41,7 @@ def show_column_summary(df,columnname='bgCAS',save=True):
     if df[columnname].dtype=='bool':
         print(f'Num True: {len(df[df[columnname]==True])}, Num False: {len(df[df[columnname]==False])}')
     elif df[columnname].dtype=='O':
-        print('       - number of non-empty cells')
+        print('       - number of non-empty cells in other columns')
         gb = df.groupby(columnname).count()
         print(gb)
         if save==True:

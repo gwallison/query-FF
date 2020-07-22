@@ -7,8 +7,7 @@
       - [Displaying the data throughout the process](#displaying-the-data-throughout-the-process)
       - [Basic analysis](#basic-analysis)
       - [Summarizing the data](#summarizing-the-data)
-    + [General structure of custom scripts](#general-structure-of-custom-scripts)
-  * [Starting with the open-FF data set that works best for you](#starting-with-the-open-ff-data-set-that-works-best-for-you)
+  * [General structure of custom scripts](#general-structure-of-custom-scripts)
   * [Using the power of python/pandas yourself](#using-the-power-of-python-pandas-yourself)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
@@ -99,7 +98,7 @@ are other formats that would be useful to you.
 #### Summarizing the data
 ** under construction **
 
-### General structure of custom scripts 
+## General structure of custom scripts 
 
 To extract the data you want, you write a simple script and then execute it
 directly in CodeOcean.  But don't worry! These scripts do not require you to
@@ -140,19 +139,6 @@ Again, we store the output in `df`.
 line does not return a dataframe.  Instead, it writes a file to disk for your later use. 
 You can download it into a spreadsheet program and make cool charts, 
 send it to your friends, or post it on your Instagram. 
-
-## Starting with the open-FF data set that works best for you
-**This function is under construction!** 
-[[[Currently, there are two forms of the open-FF data that you can start with:
-- the 'full' data set, including records that have been detected with errors
-- the 'filtered' data set, that has the error-ladened and ambiguous 
-records removed.  This set 
-is the default set. Unless you specify the full set, you will be working with the 
-filtered set.  We expect that most people will want this filtered set.
-
-If you want to work with the full set, perhaps to investigate the nature of some
-of the errors, you can use the `record_flags` field to target specific types of 
-records.  (see Example...)  ]]]
 
 
 ## Using the power of python/pandas yourself

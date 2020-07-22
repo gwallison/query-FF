@@ -6,6 +6,7 @@ Created on Sun Jul 12 06:59:19 2020
 
 various funtions to display progress and results to user
 """
+import pandas as pd
 import defaults
 import inspect
 
@@ -60,3 +61,25 @@ def show_columns(df):
     exec_banner(inspect.currentframe().f_code.co_name)
     print('\n     **  Column names ** ')
     print(list(df.columns))
+    
+def show_company_lists(df):
+    """ Save lists of raw company names with counts and associated best guess names
+    
+    Keyword arguments:
+    df -- dataframe used as input (no default)
+    """
+    exec_banner(inspect.currentframe().f_code.co_name)
+    gb1 = df.groupby(['OperatorName','UploadKey'],as_index=False)['APINumber'].count()
+    gb1 = gb1.groupby('OperatorName',as_index=False)['UploadKey'].count()
+    gb2 = df.groupby(['OperatorName'],as_index=False)['bgOperatorName'].first()
+    mg = pd.merge(gb1,gb2,on='OperatorName',how='left')
+    mg = mg.rename({'UploadKey':'disclosure_counts'},axis=1)
+    mg.to_csv(defaults.out_dir+'OperatorName_list.csv',index=False)
+    print(f'  >> OperatorName list saved.  Unique names = {len(mg)}')
+    
+    gb1 = df.groupby(['Supplier'],as_index=False)['UploadKey'].count()
+    gb2 = df.groupby(['Supplier'],as_index=False)['bgSupplier'].first()
+    mg = pd.merge(gb1,gb2,on='Supplier',how='left')
+    mg = mg.rename({'UploadKey':'record_counts'},axis=1)
+    mg.to_csv(defaults.out_dir+'Supplier_list.csv',index=False)
+    print(f'  >> Supplier list saved.  Unique names = {len(mg)}')

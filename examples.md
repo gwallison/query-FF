@@ -10,13 +10,14 @@
   * [Combining filters](#combining-filters)
 - [Simple exploration](#simple-exploration)
   * [Show list of all field names](#show-list-of-all-field-names)
+  * [Save lists of companies](#save-lists-of-companies)
   * [Show summary of a specific field](#show-summary-of-a-specific-field)
+  * [Using the unfiltered set](#using-the-unfiltered-set)
 - [Debugging your scripts](#debugging-your-scripts)
 - [Defaults](#defaults)
 - [Samples of using python/pandas coding](#samples-of-using-python-pandas-coding)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
-
 
 # Introduction
 This file contains several simple query-FF scripts that can be used to build
@@ -68,7 +69,7 @@ you leave out the `fn='AllOhio'` part, the default is `output.csv`.
 Keep all records where the Operator is Chesapeake.
 ```python
 df = get_base_df()
-df = filter_by_operator(df,operators=['chesapeake'])  
+df = filter_by_operator(df,['chesapeake'])  
 save_as_csv(df)
 ```
 This function uses the field `bgOperatorName` which is a curated version of
@@ -128,6 +129,17 @@ Here are a few simple tools to examine fields:
 df = get_base_df()
 show_columns(df)
 ```
+## Save lists of companies
+To create lists of the company names in a data frame and report
+the number of disclosures (for OperatingName) and records (for Supplier) use
+the following commands.  For each name, the associated 'best guess' (or 'bg') name
+is given.  The results are saved into csv files.
+```python
+df = get_base_df()
+show_company_lists(df)
+```
+This script snippet uses the whole set, but you could filter first, say by
+state or year.
 
 ## Show summary of a specific field
 ```python
@@ -137,6 +149,18 @@ show_column_summary(df,columnname='TradeName')
 When the column contains strings (instead of numbers), the results of this function
 will be saved into the results as a csv file, unless you include the parameter `save=False`.
 **Under construction**
+
+## Using the unfiltered set
+The examples above use the data that was filtered by the `open-FF` project to remove
+error-laden and ambiguous data.  That is the default operation.  If you want to
+explore all records, use 
+```python
+df = get_base_df(version="full")
+```
+instead of 
+```python
+df = get_base_df()
+```
 
 # Debugging your scripts
 ** Under construction **

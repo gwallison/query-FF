@@ -19,8 +19,5 @@ from modules.show_user import *
 ##########################################################################
 #   User section.  Make changes here to customize the process            #
 ##########################################################################
-
-df = get_base_df()                        # line 1
-df = filter_by_state(df,['texas'])        # line 2
-df = filter_by_county(df,['karnes'])      # line 3
-save_as_csv(df)        
+df = get_base_df(version='full')
+show_company_lists(df)

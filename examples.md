@@ -1,3 +1,21 @@
+- [Introduction](#introduction)
+- [How to use these examples in your own scripts](#how-to-use-these-examples-in-your-own-scripts)
+- [Simple filtering](#simple-filtering)
+  * [By state](#by-state)
+  * [By operator](#by-operator)
+  * [By chemical](#by-chemical)
+  * [By date](#by-date)
+  * [Keep only proprietary records](#keep-only-proprietary-records)
+  * [Using a list of items to keep](#using-a-list-of-items-to-keep)
+  * [Combining filters](#combining-filters)
+- [Simple exploration](#simple-exploration)
+  * [Show list of all field names](#show-list-of-all-field-names)
+  * [Show summary of a specific field](#show-summary-of-a-specific-field)
+- [Debugging your scripts](#debugging-your-scripts)
+- [Defaults](#defaults)
+- [Samples of using python/pandas coding](#samples-of-using-python-pandas-coding)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
 
 # Introduction

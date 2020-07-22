@@ -1,3 +1,17 @@
+- [User's Guide to query-FF](#user-s-guide-to-query-ff)
+  * [Quick Start](#quick-start)
+  * [What CAN you do with the query-FF example scripts?](#what-can-you-do-with-the-query-ff-example-scripts-)
+    + [Filtering](#filtering)
+    + [Saving products of your scripts](#saving-products-of-your-scripts)
+    + [Other functions to be added in the future](#other-functions-to-be-added-in-the-future)
+      - [Displaying the data throughout the process](#displaying-the-data-throughout-the-process)
+      - [Basic analysis](#basic-analysis)
+      - [Summarizing the data](#summarizing-the-data)
+    + [General structure of custom scripts](#general-structure-of-custom-scripts)
+  * [Starting with the open-FF data set that works best for you](#starting-with-the-open-ff-data-set-that-works-best-for-you)
+  * [Using the power of python/pandas yourself](#using-the-power-of-python-pandas-yourself)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
 # User's Guide to query-FF
 

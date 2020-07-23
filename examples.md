@@ -6,6 +6,7 @@
   * [By chemical](#by-chemical)
   * [By date](#by-date)
   * [Keep only proprietary records](#keep-only-proprietary-records)
+  * [Reducing the number of columns saved](#reducing-the-number-of-columns-saved)
   * [Using a list of items to keep](#using-a-list-of-items-to-keep)
   * [Combining filters](#combining-filters)
 - [Simple exploration](#simple-exploration)
@@ -15,7 +16,11 @@
   * [Using the unfiltered set](#using-the-unfiltered-set)
 - [Debugging your scripts](#debugging-your-scripts)
 - [Defaults](#defaults)
-- [Samples of using python/pandas coding](#samples-of-using-python-pandas-coding)
+- [Using python and pandas coding directly](#using-python-and-pandas-coding-directly)
+  * [Quick diagnostics](#quick-diagnostics)
+  * [Using conditionals to filter a data frame](#using-conditionals-to-filter-a-data-frame)
+    + [for boolean fields](#for-boolean-fields)
+  * [Using `groupby` to summarize by groups](#using--groupby--to-summarize-by-groups)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
@@ -100,6 +105,16 @@ df = get_base_df()
 df = keep_only_proprietary(df)  
 save_as_csv(df)
 ```
+
+## Reducing the number of columns saved
+Maybe you only want a handful of columns in the final set. Use `keep_only_columns()':
+```python
+df = get_base_df()
+df = keep_only_proprietary(df)  
+df = keep_only_columns(df,['bgStateName','bgOperatorName','date'])
+save_as_csv(df)
+```
+
 ------
 ## Using a list of items to keep
 Many of this fitering functions allow you to input a list of item to keep.  For
@@ -174,5 +189,91 @@ is used to set up the defaults used throughout
 any given run.  Typically, you will make your code changes just in ```working_script.py```
 but you may want to look at the defaults to understand the code's operation.
 
-# Samples of using python/pandas coding
-** Under construction **
+# Using python and pandas coding directly
+The CodeOcean environment for `query-FF` allows anyone direct access to the 
+FracFocus data using any python/pandas coding.  This provides a huge amount
+of flexibility for those that have some coding skills.  This section provides
+some ideas for developing your own scripts. You will probably benefit from having
+the python and pandas documentation nearby. (Usually doing a google search is
+sufficient. For example, search for "pandas groupby" to learn about the set of
+parameters you can use.)  
+
+## Quick diagnostics
+Use `print(df.head())` or `print(df.tail())` to see a sample of the current data frame.
+The default is five lines, but you can change that: `print(df.head(20))` 
+
+Using `print(df.info())` will give you information about each field in a data frame,
+and its overall shape.
+
+## Using conditionals to filter a data frame
+One very direct way to return a specific slice of a data frame is to use conditionals.
+The following generates a data frame where the mass of a chemical is at least
+1,000 pounds (the `MassIngredient` and `bgMass` fields are in pounds), and
+the water volume used is greater than 7,000,000 gallons (`TotalBaseWaterVolume` is
+in gallons)
+
+```python
+df = get_base_df()
+df = df[df.bgMass>1000]
+df = df[df.TotalBaseWaterVolume>7000000]
+print(df.head())
+```
+
+You can combine conditionals with operators such as "or" ('|'):
+```python
+df = get_base_df()
+df = df[(df.bgOperatorName=='anadarko petroleum')|(df.bgOperatorName=='chesapeake')]
+print(df.bgOperatorName.unique())
+```
+
+### for boolean fields
+If a field is a boolean (that is True or False), it is even easier.
+```python
+df = get_base_df()
+df = df[df.is_on_TEDX]
+print(df.head())
+```
+This returns all records where is_on_TEDX is `True`.  Using the negation symbol "~"
+will return the opposite set of records:
+```python
+df = get_base_df()
+df = df[~df.is_on_TEDX]
+print(df.head())
+```
+
+
+## Using `groupby` to summarize by groups
+The pandas method `groupby` gives you the ability to summarize by groups, either
+single fields or multiple fields.
+
+The following code tells you how many records there are for each bgCAS number.
+```python
+df = get_base_df()
+gb = df.groupby('bgCAS',as_index=False)[['UploadKey']].count()
+print(gb.head())
+```
+
+This code gives you a data frame with the total amount (in pounds) used across
+a data frame for each chemical.
+```python
+df = get_base_df()
+gb = df.groupby('bgCAS',as_index=False)[['bgMass']].sum()
+print(gb.head())
+```
+
+If you want to sum up the `PercentHFJob` values for each disclosure (`UploadKey` is the
+unique identifier for each disclosure) you could do something like this:
+```python
+df = get_base_df()
+gb = df.groupby('UploadKey',as_index=False)[['PercentHFJob']].sum()
+print(gb.head(20))
+```
+
+You can group by more than one field. The following returns a data frame
+with the total number of records from each county/state combination.
+```python
+df = get_base_df()
+gb = df.groupby(['bgStateName','bgCountyName'],as_index=False)[['bgCAS']].count()
+print(gb.head(20))
+```
+

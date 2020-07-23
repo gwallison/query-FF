@@ -19,5 +19,7 @@ from modules.show_user import *
 ##########################################################################
 #   User section.  Make changes here to customize the process            #
 ##########################################################################
-df = get_base_df(version='full')
-show_company_lists(df)
+
+df = get_base_df()
+df = df[(df.bgOperatorName=='anadarko petroleum')|(df.bgOperatorName=='chesapeake')]
+print(df.bgOperatorName.unique())

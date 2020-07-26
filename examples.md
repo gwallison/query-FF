@@ -194,7 +194,7 @@ in your data frame.
 
 ```python
 df = get_base_df()
-df = filter_by_operator(df,['anadarko petroleum'])  ]
+df = filter_by_operator(df,['anadarko petroleum'])  
 analyze_cas(df,'50-00-0')
 save_as_csv(df)
 ```
@@ -205,7 +205,7 @@ of CAS numbers.  The code creates a jupyter notebook for each material.
 
 ```python
 df = get_base_df()
-df = filter_by_operator(df,['anadarko petroleum'])  ]
+df = filter_by_operator(df,['anadarko petroleum'])  
 analyze_cas_list(df,['111-76-2','50-00-0', '91-20-3','95-63-6'])
 save_as_csv(df)
 ```

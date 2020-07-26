@@ -17,14 +17,10 @@ from modules.save_out import *
 from modules.show_user import *
 
 ##########################################################################
-#   User section.  Make changes here to customize the process            #
+#   User section.  Make changes below to customize the process            #
 ##########################################################################
 
-version = 'default'  # 'default' or 'full'
-
-df = get_base_df(version=version)
-df = filter_by_state(df,['texas','ohio'])  # can filter by more a list
-print(df.columns)
-df = filter_by_bgCAS(df,['50-00-0'])  #
-df = keep_only_columns(df,cols=['bgCountyName','bgCAS','bgMass'])
+df = get_base_df()
+df = filter_by_operator(df,['anadarko petroleum'])
+analyze_cas(df,'50-00-0')
 save_as_csv(df)

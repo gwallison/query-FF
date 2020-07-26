@@ -31,4 +31,6 @@ operators_to_keep = ['anadarko']
 min_year_to_keep = 2011
 max_year_to_keep = 2020
 cas_nums_to_keep = ['7732-18-5']  #water
+cas_analysis = '50-00-0'
 
+run_jupyter_name = 'query-FF_test1'

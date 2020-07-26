@@ -11,6 +11,8 @@ Currently, documentation is best viewed from GitHub:
 
 ## Versions
 
+**Version 3** - add CAS-specific analysis modules (raw data from May 14, 2020)
+
 **Version 2** - documentation pointers added. More filtering functions added.
 Data pickles updated to include more fields (still May 14, 2020 version).
 

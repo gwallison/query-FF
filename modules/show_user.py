@@ -9,6 +9,11 @@ various funtions to display progress and results to user
 import pandas as pd
 import defaults
 import inspect
+#import subprocess
+import os
+import shutil
+#import nbformat
+#from nbconvert.preprocessors import ExecutePreprocessor
 
 def banner(text):
     """Print banner during execution of script"""
@@ -23,10 +28,21 @@ def exec_banner(name):
     text = f'executing: {name}'
     banner(text)
     
+def run_jupyter(df,notebook_name=defaults.run_jupyter_name):
+    exec_banner(inspect.currentframe().f_code.co_name)
+    df.to_pickle('data.pkl')
+#    s= f'jupyter nbconvert --template=nbextensions --ExecutePreprocessor.allow_errors=True --ExecutePreprocessor.timeout=-1  --FilesWriter.build_directory={defaults.out_dir} --execute {notebook_name}.ipynb --to=html '
+    s= f'jupyter nbconvert --template=nbextensions --ExecutePreprocessor.allow_errors=True --ExecutePreprocessor.timeout=-1  --execute {notebook_name}.ipynb --to=html '
+    rtn = os.system(s)
+    if rtn==0:
+        print('  >> Jupyter run completed without error')
+    else:
+        print(f'  >>  !!!  Errors encountered when running {notebook_name}   !!!')
+    
 def simple_df_summary(df):
     """Show simple summary of dataframe if default.feeback_text is set to "verbose" """
     if defaults.feedback_text == 'verbose':
-        print(f'  -- Num columns: {len(df.columns)}, num records: {len(df)}')
+        print(f'  -- Resulting data frame:  num columns = {len(df.columns)}, num records = {len(df)}')
     
 def show_column_summary(df,columnname='bgCAS',save=True):
     """ Display a summary of any column of a dataframe.
@@ -83,3 +99,33 @@ def show_company_lists(df):
     mg = mg.rename({'UploadKey':'record_counts'},axis=1)
     mg.to_csv(defaults.out_dir+'Supplier_list.csv',index=False)
     print(f'  >> Supplier list saved.  Unique names = {len(mg)}')
+    
+def analyze_cas(df,cas=defaults.cas_analysis):
+    """ Perform analysis on all records with a specific bgCAS identity; save as html
+    
+    Keyword arguments:
+    df -- dataframe used as input (no default)
+    cas -- string identifier for CAS number, ex. "7732-18-5"
+    """
+    t = df[df.bgCAS==cas]
+    if len(t)>0:
+        run_jupyter(t,notebook_name='cas_analysis')
+        outname = defaults.out_dir+cas+".html"
+        print(f'  >> Saving analysis as {outname}')
+        shutil.move('cas_analysis.html',
+                    outname)
+    else:
+        print('\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+        print(f'    No records were found for {cas}')
+        print('    Output file not created')
+        print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n')
+        
+def analyze_cas_list(df,caslist=[defaults.cas_analysis]):
+    """ Perform multiple analyses on all records with a specific bgCAS identity; save as html
+    
+    Keyword arguments:
+    df -- dataframe used as input (no default)
+    caslist -- list containing string identifiers, ex. ["7732-18-5","50-00-0"]
+    """
+    for cas in caslist:
+        analyze_cas(df,cas)

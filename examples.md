@@ -14,12 +14,14 @@
   * [Save lists of companies](#save-lists-of-companies)
   * [Show summary of a specific field](#show-summary-of-a-specific-field)
   * [Using the unfiltered set](#using-the-unfiltered-set)
+- [Analysis](#analysis)
+  * [Analysis of an individual chemical](#analysis-of-an-individual-chemical)
+  * [Analysis of a list of chemicals](#analysis-of-a-list-of-chemicals)
 - [Debugging your scripts](#debugging-your-scripts)
 - [Defaults](#defaults)
 - [Using python and pandas coding directly](#using-python-and-pandas-coding-directly)
   * [Quick diagnostics](#quick-diagnostics)
   * [Using conditionals to filter a data frame](#using-conditionals-to-filter-a-data-frame)
-    + [for boolean fields](#for-boolean-fields)
   * [Using `groupby` to summarize by groups](#using--groupby--to-summarize-by-groups)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
@@ -163,7 +165,7 @@ show_column_summary(df,columnname='TradeName')
 ```
 When the column contains strings (instead of numbers), the results of this function
 will be saved into the results as a csv file, unless you include the parameter `save=False`.
-**Under construction**
+
 
 ## Using the unfiltered set
 The examples above use the data that was filtered by the `open-FF` project to remove
@@ -176,7 +178,37 @@ instead of
 ```python
 df = get_base_df()
 ```
+# Analysis
+You can perform some canned analysis on the data frames that you create with
+the following commands.  This is done within query-FF by executing a Jupyter
+notebook using your data frame and saving the results as an html webpage.  Like all
+other output files at CodeOcean, you can view that directly in CodeOcean, download
+it for local use, or even link to it to share with others.
 
+## Analysis of an individual chemical
+The following code filters the data to a single company, runs the analysis code
+on formaldehye and then saves the data frame. Note that the saved data frame still
+has all the chemicals the company used, but only one is analyzed in the html file.
+This routine won't produce an output if there are no records for the chemical
+in your data frame. 
+
+```python
+df = get_base_df()
+df = filter_by_operator(df,['anadarko petroleum'])  ]
+analyze_cas(df,'50-00-0')
+save_as_csv(df)
+```
+
+## Analysis of a list of chemicals
+Here, instead of passing a single CAS number to the function, we pass a list
+of CAS numbers.  The code creates a jupyter notebook for each material.
+
+```python
+df = get_base_df()
+df = filter_by_operator(df,['anadarko petroleum'])  ]
+analyze_cas_list(df,['111-76-2','50-00-0', '91-20-3','95-63-6'])
+save_as_csv(df)
+```
 # Debugging your scripts
 ** Under construction **
 Because this project is currently under development, please feel free to contact
@@ -205,6 +237,12 @@ The default is five lines, but you can change that: `print(df.head(20))`
 Using `print(df.info())` will give you information about each field in a data frame,
 and its overall shape.
 
+Use `unique()` to see the various categories in a field:
+```python
+df = get_base_df()
+print(df.bgStateName.unique())
+```
+
 ## Using conditionals to filter a data frame
 One very direct way to return a specific slice of a data frame is to use conditionals.
 The following generates a data frame where the mass of a chemical is at least
@@ -225,8 +263,6 @@ df = get_base_df()
 df = df[(df.bgOperatorName=='anadarko petroleum')|(df.bgOperatorName=='chesapeake')]
 print(df.bgOperatorName.unique())
 ```
-
-### for boolean fields
 If a field is a boolean (that is True or False), it is even easier.
 ```python
 df = get_base_df()
@@ -235,6 +271,7 @@ print(df.head())
 ```
 This returns all records where is_on_TEDX is `True`.  Using the negation symbol "~"
 will return the opposite set of records:
+
 ```python
 df = get_base_df()
 df = df[~df.is_on_TEDX]

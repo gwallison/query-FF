@@ -209,6 +209,36 @@ df = filter_by_operator(df,['anadarko petroleum'])
 analyze_cas_list(df,['111-76-2','50-00-0', '91-20-3','95-63-6'])
 save_as_csv(df)
 ```
+
+You may want to pull the list from an external file.  For this, you can use
+the `fetch_table_from_file` command, like this:
+```python
+table = fetch_table_from_file(filename='sample_table.csv')
+caslst = make_list_of_unique(table,'bgCAS')
+df = get_base_df()
+analyze_cas_list(df,caslst)
+```
+In this case, the file 'sample_table.csv' is in the /data directory, but you 
+can put any file there as input.  This command expects simple 'csv' format with
+the first row consisting of labels for the columns and all other rows are the
+data.
+
+Or you may wish to create a list to use directly from the data frame you've created.
+The following example first creates a data set (for Washington County, PA) and
+then creates a list of all the unique `bgCAS` labels it finds.  We add one more 
+parameter to the `analyze_cas_list()` command to only perform analysis on a chemical
+if we have at least 50 records.  Many of the FracFocus chemicals are used infrequently; 
+when that is the case, the chemical profiles often of little use.
+
+```python
+df = get_base_df()
+df = filter_by_year_range(df,minyr=2017,maxyr=2019)
+df = filter_by_state(df,['pennsylvania'])
+df = filter_by_county(df,['washington'])
+lst = make_list_of_unique(df,'bgCAS')
+analyze_cas_list(df,lst,minCount=50)
+```
+
 # Debugging your scripts
 ** Under construction **
 Because this project is currently under development, please feel free to contact
@@ -279,7 +309,7 @@ print(df.head())
 ```
 
 
-## Using `groupby` to summarize by groups
+## Using groupby to summarize by groups
 The pandas method `groupby` gives you the ability to summarize by groups, either
 single fields or multiple fields.
 
@@ -290,11 +320,27 @@ gb = df.groupby('bgCAS',as_index=False)[['UploadKey']].count()
 print(gb.head())
 ```
 
-This code gives you a data frame with the total amount (in pounds) used across
+This code gives you a data frame with the **total** amount (in pounds) used across
 a data frame for each chemical.
 ```python
 df = get_base_df()
 gb = df.groupby('bgCAS',as_index=False)[['bgMass']].sum()
+print(gb.head())
+```
+
+This code gives you a data frame with the **average** amount (in pounds) used across
+a data frame for each chemical.
+```python
+df = get_base_df()
+gb = df.groupby('bgCAS',as_index=False)[['bgMass']].mean()
+print(gb.head())
+```
+
+This code gives you a data frame with the **median** amount (in pounds) used across
+a data frame for each chemical.
+```python
+df = get_base_df()
+gb = df.groupby('bgCAS',as_index=False)[['bgMass']].median()
 print(gb.head())
 ```
 

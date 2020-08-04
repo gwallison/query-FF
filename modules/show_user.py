@@ -99,33 +99,82 @@ def show_company_lists(df):
     mg = mg.rename({'UploadKey':'record_counts'},axis=1)
     mg.to_csv(defaults.out_dir+'Supplier_list.csv',index=False)
     print(f'  >> Supplier list saved.  Unique names = {len(mg)}')
-    
-def analyze_cas(df,cas=defaults.cas_analysis):
+
+def make_list_of_unique(df,columnname='bgCAS'):
+    """ Return list of unique values in the field "columnname"
+    df -- dataframe used as input (no default)
+    columnname -- name of column to be summarized   
+    """
+    exec_banner(inspect.currentframe().f_code.co_name)
+    lst = list(df[columnname].unique())
+    print(f'  >> Number of items in created list: {len(lst)}')
+    return lst
+
+def analyze_cas(df,cas=defaults.cas_analysis,minCount=1):
     """ Perform analysis on all records with a specific bgCAS identity; save as html
     
     Keyword arguments:
     df -- dataframe used as input (no default)
     cas -- string identifier for CAS number, ex. "7732-18-5"
+    minCount -- how many records must be present in the data frame for a profile
+                to be performed.
     """
+    exec_banner(inspect.currentframe().f_code.co_name)
     t = df[df.bgCAS==cas]
-    if len(t)>0:
+    meets_len = len(t)>= minCount
+    if meets_len:
         run_jupyter(t,notebook_name='cas_analysis')
         outname = defaults.out_dir+cas+".html"
         print(f'  >> Saving analysis as {outname}')
         shutil.move('cas_analysis.html',
                     outname)
     else:
-        print('\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-        print(f'    No records were found for {cas}')
-        print('    Output file not created')
-        print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n')
+        #print('\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+        print(f'    CAS profile for {cas} not created')
+        print(f'    -- Minimum number of records ({minCount}) not present in data frame')
+        #print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n')
         
-def analyze_cas_list(df,caslist=[defaults.cas_analysis]):
+def analyze_cas_list(df,caslist=[defaults.cas_analysis],minCount=1):
     """ Perform multiple analyses on all records with a specific bgCAS identity; save as html
     
     Keyword arguments:
     df -- dataframe used as input (no default)
     caslist -- list containing string identifiers, ex. ["7732-18-5","50-00-0"]
+    minCount -- how many records must be present in the data frame for a profile
+                to be performed.
     """
+    exec_banner(inspect.currentframe().f_code.co_name)
     for cas in caslist:
-        analyze_cas(df,cas)
+        analyze_cas(df,cas,minCount=minCount)
+        
+def fetch_table_from_file(filename=defaults.ext_filename,
+                          dir = defaults.sources):
+    """ Return data frame from a simple external file (formants: csv)
+    
+    Keyword arguments:
+    filename = name of input file.
+    dir = path name of directory that contains the file
+    
+    Notes: 
+    file formats supported:
+        *.csv - comma delimited.  Spreadsheet programs will save any sheet into this
+                format.
+                
+    This function expects a file where the first row is the name of each
+    column and the subsequent rows are the values.  If you wish to try something more
+    complicated, you can use the native pandas functions like read_csv that 
+    have a huge amount of flexibility, though not as simple to use.
+    """
+    exec_banner(inspect.currentframe().f_code.co_name)
+      
+    extension = filename.split('.')[-1]
+    print(extension)
+    if extension=='csv':
+        print(f'  >> Reading file of type CSV')
+        df = pd.read_csv(dir+filename)
+    else:
+        print(f'  >> Unsupported file type ({extension}), returning empty data frame')
+        df = pd.DataFrame()
+    print('    --  First rows of the table -- ')
+    print(df.head())
+    return df

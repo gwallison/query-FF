@@ -25,6 +25,7 @@ df_remove_records = 'R|1|2|4|5'
 output_cols = ['UploadKey','date','bgCAS','bgMass','bgStateName','bgCountyName',
                 'bgOperatorName','TotalBaseWaterVolume']
 output_fn = 'output'
+ext_filename = 'sample_table.csv'
 
 states_to_keep = ['ohio']
 operators_to_keep = ['anadarko']

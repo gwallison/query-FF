@@ -11,6 +11,10 @@ Currently, documentation is best viewed from GitHub:
 
 ## Versions
 
+**Version 5** - raw data from July 31, 2020; 
+
+**Version 4** - add functions to work with lists (raw data from May 14, 2020)
+
 **Version 3** - add CAS-specific analysis modules (raw data from May 14, 2020)
 
 **Version 2** - documentation pointers added. More filtering functions added.

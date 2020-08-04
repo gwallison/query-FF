@@ -105,4 +105,15 @@ def keep_only_proprietary(df):
     df = df[df.proprietary]
     simple_df_summary(df)
     return df
+
+def keep_only_TEDX(df):
+    """ Return dataframe with only rows identified with "is_on_TEDX" flag.
+    
+    Keyword arguments:
+    df -- dataframe used as input (no default)
+    """
+    exec_banner(inspect.currentframe().f_code.co_name)
+    df = df[df.is_on_TEDX]
+    simple_df_summary(df)
+    return df
     
